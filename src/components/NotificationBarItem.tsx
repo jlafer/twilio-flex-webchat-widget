@@ -1,6 +1,6 @@
 import { Text } from "@twilio-paste/core/text";
 import { Alert } from "@twilio-paste/core/alert";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
 import { Notification } from "../store/definitions";

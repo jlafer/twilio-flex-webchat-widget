@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { CustomizationProvider, CustomizationProviderProps } from "@twilio-paste/core/customization";
-import { CSSProperties, FC, useEffect } from "react";
+import React, { CSSProperties, FC, useEffect } from "react";
 
 import { RootContainer } from "./RootContainer";
 import { AppState, EngagementPhase } from "../store/definitions";

@@ -1,4 +1,4 @@
-import { UIEvent, useEffect, useRef, useState } from "react";
+import React, { UIEvent, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Box } from "@twilio-paste/core/box";
 import { Text } from "@twilio-paste/core/text";

@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import React, { ReactElement } from "react";
 import { Anchor } from "@twilio-paste/core/anchor";
 
 const protocol = "((?:http|https|rtsp):\\/\\/)";

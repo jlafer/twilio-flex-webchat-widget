@@ -1,3 +1,4 @@
+import React from "react";
 import { Message } from "@twilio/conversations";
 import { Box } from "@twilio-paste/core/box";
 import { Text } from "@twilio-paste/core/text";

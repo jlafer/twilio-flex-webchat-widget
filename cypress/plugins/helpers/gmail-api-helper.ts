@@ -13,15 +13,17 @@ export class GmailAPIHelper {
             oAuthClientOptions.clientSecret,
             oAuthClientOptions.redirectUri
         );
-        this.refreshToken = token.refresh_token;
+        this.refreshToken = (token.refresh_token) ? token.refresh_token : "No token string?";
         this.oAuth2Client.setCredentials(token);
     }
 
     public async getReceivedEmails(emailCount: number) {
         const gmail = google.gmail({ version: "v1", auth: this.oAuth2Client });
         const response = await gmail.users.messages.list({ userId: "me", labelIds: ["INBOX"], maxResults: emailCount });
+        if (! response.data.messages)
+          return Promise.resolve([]);
         return Promise.all(
-            response.data.messages.map(async (message) => {
+            response.data.messages.map((message) => {
                 return this.getEmail(message.id);
             })
         );

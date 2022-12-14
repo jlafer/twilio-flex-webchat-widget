@@ -4,7 +4,8 @@
 
 import * as fs from "fs";
 
-import * as JSZip from "jszip";
+import JSZip from "jszip";
+//import * as JSZip from "jszip";
 import { config } from "dotenv";
 
 import {

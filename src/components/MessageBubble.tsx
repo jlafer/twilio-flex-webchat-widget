@@ -1,3 +1,4 @@
+import React from "react";
 import { Media, Message } from "@twilio/conversations";
 import { Box } from "@twilio-paste/core/box";
 import { ScreenReaderOnly } from "@twilio-paste/core/screen-reader-only";

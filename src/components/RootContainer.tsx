@@ -1,5 +1,6 @@
 import { Box } from "@twilio-paste/core/box";
 import { useSelector } from "react-redux";
+import React from "react";
 
 import { MessagingCanvasPhase } from "./MessagingCanvasPhase";
 import { AppState, EngagementPhase } from "../store/definitions";

@@ -10,7 +10,7 @@ interface Transcript {
 }
 
 const getTranscriptData = (messages: Message[] | undefined, users: User[] | undefined): Transcript[] => {
-    const transcriptData = [];
+    const transcriptData : Transcript[] = [];
     if (messages && users) {
         for (const message of messages) {
             const currentUser = users.find((user) => user.identity === message.author);
@@ -36,7 +36,7 @@ const getAgentNames = (customerName: string | undefined, transcriptData: Transcr
 
 const getUniqueFilenames = (transcriptData: Transcript[]) => {
     const mediaMessages = transcriptData.filter((message) => message.attachedMedia);
-    const filenames = [];
+    const filenames: string[] = [];
     for (const message of mediaMessages || []) {
         for (const media of message.attachedMedia || []) {
             filenames.push(media.filename);
@@ -46,7 +46,7 @@ const getUniqueFilenames = (transcriptData: Transcript[]) => {
         [key: string]: number;
     }
     const seenFilenames: seenFilenamesInfo = {};
-    const uniqueFilenames = [];
+    const uniqueFilenames : string[] = [];
     for (const filename of filenames) {
         if (Object.keys(seenFilenames).includes(filename)) {
             const fileExtension = filename.split(".").pop() || "";

@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import React, { useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Button } from "@twilio-paste/core/button";
 import { AttachIcon } from "@twilio-paste/icons/esm/AttachIcon";

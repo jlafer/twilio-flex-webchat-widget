@@ -1,5 +1,5 @@
 import { Message, User } from "@twilio/conversations";
-import { useState } from "react";
+import React, { useState } from "react";
 import log from "loglevel";
 import { Box } from "@twilio-paste/core/box";
 import { Flex } from "@twilio-paste/core/flex";
@@ -30,6 +30,12 @@ interface TranscriptProps {
     transcriptConfig: TranscriptConfig | undefined;
 }
 
+interface MediaInfo {
+  url: string;
+  filename: string;
+  type: string;
+}
+
 export const Transcript = (props: TranscriptProps) => {
     const [isGeneratingTranscript, setIsGeneratingTranscript] = useState(false);
     const [isDownloadingTranscript, setIsDownloadingTranscript] = useState(false);
@@ -37,7 +43,7 @@ export const Transcript = (props: TranscriptProps) => {
 
     const getMediaInfo = async () => {
         const mediaMessages = props.messages?.filter((message) => message.attachedMedia);
-        const mediaInfo = [];
+        const mediaInfo : MediaInfo[] = [];
         for (const message of mediaMessages || []) {
             for (const media of message.attachedMedia || []) {
                 try {

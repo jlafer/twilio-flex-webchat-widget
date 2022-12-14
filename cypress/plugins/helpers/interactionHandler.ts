@@ -1,4 +1,4 @@
-import axios, { AxiosError, AxiosResponse } from "axios";
+import axios, { AxiosError, AxiosResponse, Method } from "axios";
 import { TaskInstance } from "twilio/lib/rest/taskrouter/v1/workspace/task";
 
 import { getTaskAndReservationFromConversationSid, getWorker, setWorkerOnline } from "./getWorker";
@@ -167,6 +167,11 @@ export const getCustomerName = async ({ conversationSid }: { conversationSid: st
     return JSON.parse(task.attributes).from;
 };
 
+interface MediaWithFilename {
+  filename: string;
+  sid: string;
+}
+
 export const getLastMessageMediaData = async ({ conversationSid }: { conversationSid: string }) => {
     await new Promise((res) => setTimeout(res, 2000)); // Add buffer to avoid api calls being made too close together
 
@@ -174,7 +179,8 @@ export const getLastMessageMediaData = async ({ conversationSid }: { conversatio
     const messageIM = await client.conversations
         .conversations(conversationSid)
         .messages.list({ order: "desc", limit: 1 });
-    return messageIM[0].media[0].filename;
+    const media = messageIM[0].media[0] as MediaWithFilename;
+    return media.filename;
 };
 
 export const getLastMessageAllMediaFilenames = async ({ conversationSid }: { conversationSid: string }) => {
@@ -183,7 +189,8 @@ export const getLastMessageAllMediaFilenames = async ({ conversationSid }: { con
     const { 0: lastMessage } = await client.conversations
         .conversations(conversationSid)
         .messages.list({ order: "desc", limit: 1 });
-    return lastMessage.media.map((m) => m.filename);
+    const media = lastMessage.media as MediaWithFilename[];
+    return media.map((m) => m.filename);
 };
 
 export const getLastMessageText = async ({ conversationSid }: { conversationSid: string }) => {
@@ -199,9 +206,10 @@ export const validateAttachmentLink = async ({ conversationSid }: { conversation
     const messageIM = await client.conversations
         .conversations(conversationSid)
         .messages.list({ order: "desc", limit: 1 });
-    const mediaSid = messageIM[0].media[0].sid;
+    const media = messageIM[0].media[0] as MediaWithFilename;
+    const mediaSid = media.sid;
     const options = {
-        method: "GET",
+        method: "GET" as Method,
         url: `https://mcs.us1.twilio.com/v1/Services/ISefe4b42a882440c0adcfd843a197151a/Media/${mediaSid}`,
         auth: {
             username: client.username,

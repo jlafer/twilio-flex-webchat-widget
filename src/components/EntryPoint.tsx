@@ -1,3 +1,4 @@
+import React from "react";
 import { Box } from "@twilio-paste/core/box";
 import { ChatIcon } from "@twilio-paste/icons/esm/ChatIcon";
 import { ChevronDownIcon } from "@twilio-paste/icons/esm/ChevronDownIcon";
